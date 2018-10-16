@@ -19,7 +19,7 @@ public class EfficientWordMarkov extends BaseWordMarkov {
 		this(3);
 	}
 	
-	public String[] stringToArray(String text)
+	private String[] stringToArray(String text)
 	{
 		String[] arrayString = new String[text.length()];
 		for(int i = 0; i < text.length();i++)
@@ -36,7 +36,7 @@ public class EfficientWordMarkov extends BaseWordMarkov {
 	{
 		myMap = new HashMap<>();
 		String trainText = text;
-		for(int i = 0; i < text.length()-getOrder()-1;i++)//loop through text
+		for(int i = 0; i < text.length()-getOrder()+1;i++)//loop through text
 		//make sure to subtract order so we don't get out of bounds exception
 		{
 			String[] textArray = stringToArray(text);
@@ -45,6 +45,8 @@ public class EfficientWordMarkov extends BaseWordMarkov {
 			
 			int track = text.length()-getOrder();
 			String lastCh;
+			
+			//this if else statement here will identify the correct 
 			if(i == track)
 				lastCh = "PSEUDO_EOS";
 			else

@@ -21,7 +21,7 @@ public class EfficientMarkov extends BaseMarkov{
 	{
 		myMap = new HashMap<>();//delete this
 		String trainText = text;
-		for(int i = 0; i < text.length()-getOrder()-1;i++)//loop through text
+		for(int i = 0; i < text.length()-getOrder()+1;i++)//loop through text
 		//make sure to subtract order so we don't get out of bounds exception
 		{
 			String sub = trainText.substring(i,i + getOrder());
