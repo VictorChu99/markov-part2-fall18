@@ -10,7 +10,7 @@ import java.util.*;
 
 public class MarkovDriver {
 	
-	private static final int TEXT_SIZE = 200;
+	private static final int TEXT_SIZE = 1234;
 	
 	public static void markovGenerate(MarkovInterface<?> markov, String text) {
 		double start = System.nanoTime();
@@ -38,7 +38,7 @@ public class MarkovDriver {
 		File f = new File(filename);
 		String text = TextSource.textFromFile(f);
 		MarkovInterface<String> standard = new BaseMarkov();
-		//MarkovInterface<String> efficient = new EfficientMarkov();
+		MarkovInterface<String> efficient = new EfficientMarkov();
 		MarkovInterface<WordGram> wmm = new BaseWordMarkov();
 		//MarkovInterface<WordGram> ewm = new EfficientWordMarkov();
 		markovGenerate(standard,text);
