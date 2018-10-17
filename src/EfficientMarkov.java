@@ -19,18 +19,20 @@ public class EfficientMarkov extends BaseMarkov{
 	@Override
 	public void setTraining(String text)
 	{
-		myMap = new HashMap<>();//delete this
 		String trainText = text;
 		for(int i = 0; i < text.length()-getOrder()+1;i++)//loop through text
 		//make sure to subtract order so we don't get out of bounds exception
+		//+1 is important, is it ensures 
 		{
-			String sub = trainText.substring(i,i + getOrder());
+			String sub = trainText.substring(i, i + getOrder());//gets the key. starts at i, then goes to i + getOrder()
 			int track = text.length()-getOrder();
 			String lastCh;
 			if(i == track)
 				lastCh = "PSEUDO_EOS";
 			else
 				lastCh = trainText.substring(i+getOrder(),i+getOrder()+1);
+			
+			
 			
 			if(!myMap.containsKey(sub))
 			{
