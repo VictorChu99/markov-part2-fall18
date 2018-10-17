@@ -40,8 +40,8 @@ public class MarkovDriver {
 		MarkovInterface<String> standard = new BaseMarkov();
 		MarkovInterface<String> efficient = new EfficientMarkov();
 		MarkovInterface<WordGram> wmm = new BaseWordMarkov();
-		//MarkovInterface<WordGram> ewm = new EfficientWordMarkov();
-		markovGenerate(standard,text);
+		MarkovInterface<WordGram> ewm = new EfficientWordMarkov();
+		markovGenerate(ewm,text);
 	}
 
 	private static void printNicely(String random, int screenWidth) {
