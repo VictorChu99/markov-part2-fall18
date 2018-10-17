@@ -7,7 +7,7 @@ public class EfficientMarkov extends BaseMarkov{//extends base markov.
 	//we get passed the full text, but need to save this somewhere
 		//deals with instance vs local variables
 	
-	Map<String,ArrayList<String>> myMap;
+	private Map<String,ArrayList<String>> myMap;
 	
 	
 	
