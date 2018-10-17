@@ -14,10 +14,10 @@ import java.util.*;
  */
 
 public class BaseMarkov  implements MarkovInterface<String> {
-	protected String myText;
+	protected String myText;//sub class has access to these. 
 	protected Random myRandom;
 	protected int myOrder;
-	protected static String PSEUDO_EOS = "";
+	protected static String PSEUDO_EOS = "";//PSEUDO_EOS is our instance variable. Trying to compare "Pseduo_EOS" with ""
 	protected static long RANDOM_SEED = 1234;
 	
 	/**
@@ -57,14 +57,15 @@ public class BaseMarkov  implements MarkovInterface<String> {
 		sb.append(current);
 		
 		for(int k=0; k < length-myOrder; k += 1){
-			ArrayList<String> follows = getFollows(current);
+			ArrayList<String> follows = getFollows(current);//returns an arrayList
 			if (follows.size() == 0){
 				break;
 			}
 			index = myRandom.nextInt(follows.size());
 			
 			String nextItem = follows.get(index);
-			if (nextItem.equals(PSEUDO_EOS)) {
+			//use variable pseduo EOS
+			if (nextItem.equals(PSEUDO_EOS)) {//stop when we reach the end of the string
 				//System.out.println("PSEUDO");
 				break;
 			}

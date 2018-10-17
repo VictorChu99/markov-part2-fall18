@@ -34,21 +34,21 @@ public class EfficientWordMarkov extends BaseWordMarkov {
 	@Override
 	public void setTraining(String text)
 	{
-		myMap = new HashMap<>();
 		String trainText = text;
-		for(int i = 0; i < text.length()-getOrder()+1;i++)//loop through text
+		String[] textArray = stringToArray(trainText);
+		
+		
+		for(int i = 0; i < textArray.length-getOrder()+1;i++)//loop through text
 		//make sure to subtract order so we don't get out of bounds exception
 		{
-			String[] textArray = stringToArray(text);
-			
 			WordGram key = new WordGram(textArray, i, getOrder());
 			
-			int track = text.length()-getOrder();
+			int track = textArray.length-getOrder();
 			String lastCh;
 			
 			//this if else statement here will identify the correct 
 			if(i == track)
-				lastCh = "PSEUDO_EOS";
+				lastCh = PSEUDO_EOS;
 			else
 				lastCh = trainText.substring(i+getOrder(),i+getOrder()+1);
 			

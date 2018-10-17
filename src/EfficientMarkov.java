@@ -1,8 +1,15 @@
 import java.util.*;
+import java.util.NoSuchElementException;
 
-public class EfficientMarkov extends BaseMarkov{
+public class EfficientMarkov extends BaseMarkov{//extends base markov. 
+	//myText issue. myText is used for text generation, since we need to pick a starting point
+	//base markov chooses a random starting point
+	//we get passed the full text, but need to save this somewhere
+		//deals with instance vs local variables
 	
 	Map<String,ArrayList<String>> myMap;
+	
+	
 	
 	public EfficientMarkov(int order)
 	{
@@ -19,30 +26,27 @@ public class EfficientMarkov extends BaseMarkov{
 	@Override
 	public void setTraining(String text)
 	{
-		String trainText = text;
+		myText= text;
 		for(int i = 0; i < text.length()-getOrder()+1;i++)//loop through text
 		//make sure to subtract order so we don't get out of bounds exception
-		//+1 is important, is it ensures 
+		//+1 is important
 		{
-			String sub = trainText.substring(i, i + getOrder());//gets the key. starts at i, then goes to i + getOrder()
-			int track = text.length()-getOrder();
+			String sub = myText.substring(i, i + getOrder());//gets the key. starts at i, then goes to i + getOrder()
+			int track = myText.length()-getOrder();
 			String lastCh;
 			if(i == track)
-				lastCh = "PSEUDO_EOS";
+				lastCh = PSEUDO_EOS;//inherits PSEUDO_EOS which is "". Trying to compare apples
+									//to oranges if I used "PSEUDO_EOS" since PSEUDO_EOS is inherited from BaseMarkov
 			else
-				lastCh = trainText.substring(i+getOrder(),i+getOrder()+1);
-			
-			
+				lastCh = myText.substring(i+getOrder(),i+getOrder()+1);
 			
 			if(!myMap.containsKey(sub))
 			{
-				myMap.put(sub, new ArrayList<String>());
+				ArrayList<String> mapVal = new ArrayList<>();
+				myMap.put(sub, mapVal);//create  a map and add arrayLists
 			}
 			
-			if(i == track)
-				myMap.get(sub).add(lastCh);
-			else
-				myMap.get(sub).add(lastCh);
+			myMap.get(sub).add(lastCh);//add the last character to the arrayList
 			
 		}
 		
@@ -51,10 +55,11 @@ public class EfficientMarkov extends BaseMarkov{
 	@Override
 	public ArrayList<String> getFollows(String key)
 	{
+		
 		if(!myMap.containsKey(key))
 			throw new NoSuchElementException(key+" not in map");
-		else
-			return myMap.get(key);
+		
+		return myMap.get(key);
 	}
 	
 	
