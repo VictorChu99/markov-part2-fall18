@@ -5,6 +5,11 @@ import java.util.NoSuchElementException;
 import java.util.*;
 
 public class EfficientWordMarkov extends BaseWordMarkov {
+	//more or less the same as EfficientMarkov
+	//but using wordgrams as the keys instead.
+	//as such, have to call the wordgram class 
+	//to make wordgram objects
+	
 	
 	private Map<WordGram,ArrayList<String>> myMap;
 	
@@ -14,7 +19,7 @@ public class EfficientWordMarkov extends BaseWordMarkov {
 		myMap = new HashMap<WordGram,ArrayList<String>>();//create a map but with wordgram objects now
 	}
 	
-	public EfficientWordMarkov()
+	public EfficientWordMarkov()//default constructor
 	{
 		this(3);
 	}
@@ -25,9 +30,13 @@ public class EfficientWordMarkov extends BaseWordMarkov {
 	public void setTraining(String text)
 	{
 		myWords= text.split("\\s+");//why do we have to do this????
+		//We are going to be using an array
+		//as per our wordgram class for later. 
 		
 		
-		for(int i = 0; i < myWords.length-getOrder()+1;i++)//loop through text
+		myMap.clear();
+		
+		for(int i = 0; i <= myWords.length-getOrder();i++)//loop through text
 		//make sure to subtract order so we don't get out of bounds exception
 		{
 			WordGram key = new WordGram(myWords, i, getOrder());
@@ -35,7 +44,7 @@ public class EfficientWordMarkov extends BaseWordMarkov {
 			int track = myWords.length-getOrder();
 			//this if else statement here will identify the correct 
 			String ch; 
-			if(i == track)
+			if(i == track)//must be the last character
 			{
 				ch = PSEUDO_EOS;
 			}
@@ -58,8 +67,11 @@ public class EfficientWordMarkov extends BaseWordMarkov {
 	{
 		if(!myMap.containsKey(key))
 			throw new NoSuchElementException(key+" not in map");
-		else
-			return myMap.get(key);
+		else {
+			ArrayList<String> returnVal = myMap.get(key);
+			
+			return returnVal;
+		}
 	}
 	
 	
