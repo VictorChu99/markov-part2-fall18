@@ -31,14 +31,15 @@ public class EfficientMarkov extends BaseMarkov{//extends base markov.
 		//make sure to subtract order so we don't get out of bounds exception
 		//+1 is important
 		{
-			String sub = myText.substring(i, i + getOrder());//gets the key. starts at i, then goes to i + getOrder()
+			int end = i + getOrder();
+			String sub = myText.substring(i, end);//gets the key. starts at i, then goes to i + getOrder()
 			int track = myText.length()-getOrder();
 			String lastCh;
 			if(i == track)
 				lastCh = PSEUDO_EOS;//inherits PSEUDO_EOS which is "". Trying to compare apples
 									//to oranges if I used "PSEUDO_EOS" since PSEUDO_EOS is inherited from BaseMarkov
 			else
-				lastCh = myText.substring(i+getOrder(),i+getOrder()+1);
+				lastCh = myText.substring(end, end +1);
 			
 			if(!myMap.containsKey(sub))
 			{
