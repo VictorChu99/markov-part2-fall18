@@ -42,8 +42,7 @@ public class EfficientMarkov extends BaseMarkov{//extends base markov.
 			
 			if(!myMap.containsKey(sub))
 			{
-				ArrayList<String> mapVal = new ArrayList<>();
-				myMap.put(sub, mapVal);//create  a map and add arrayLists
+				myMap.put(sub, new ArrayList<String>());//create  a map and add arrayLists
 			}
 			
 			myMap.get(sub).add(lastCh);//add the last character to the arrayList

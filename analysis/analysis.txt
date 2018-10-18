@@ -7,9 +7,43 @@ that are reproduced below
 BaseMarkov to generate 2,000, 4,000, 8,000, 16,000, and 32,000 
 random characters using the default file and an order 5 Markov Model. 
 Include these timings in your report. 
+
+Starting tests
+
+time	source	#chars
+0.268	507914	2000
+0.525	507914	4000
+1.024	507914	8000
+2.447	507914	16000
+4.698	507914	32000
+
+0.619	507914	4096
+1.168	1015828	4096
+1.987	1523742	4096
+2.707	2031656	4096
+3.503	2539570	4096
+4.087	3047484	4096
+4.716	3555398	4096
+5.403	4063312	4096
+5.948	4571226	4096
+6.417	5079140	4096
+
+Finished tests
+
+Source code is 496,768, but I 507,914. Piazza post addressed this issue. 
+TA said it was okay as well
+
+
 The program also generates 4,096 characters using texts that increase in 
 size from 496,768 characters to 4,967,680 characters (10 times the number).  
 Do you the timings support the O(NT) analysis for BaseMarkov?
+
+Yes. When we multiplied the source by 10, the time roughly increased by a factor 
+of 10 as well. These claims support O(N) complexity. Since we are increasing the characters
+by a factor of 10, the program has to go through each of those characters. For example,
+if you doubled the characters, you would increase time by roughly a factor of 2. As you 
+increase the amount of characters, this code gets longer. 
+ 
 
 
 
@@ -17,11 +51,38 @@ Do you the timings support the O(NT) analysis for BaseMarkov?
 EfficientMarkov to generate 2,000, 4,000, 8,000, 16,000, and 32,000 
 random characters using the default file and an order 5 Markov Model. 
 Include these timings in your report. 
+
+Starting tests
+
+time	source	#chars
+0.459	507914	2000
+0.479	507914	4000
+0.545	507914	8000
+0.548	507914	16000
+0.595	507914	32000
+
+0.555	507914	4096
+1.588	1015828	4096
+2.785	1523742	4096
+3.946	2031656	4096
+6.572	2539570	4096
+Cut off due to heap memory error. 
+
 The program also generates 4,096 characters using texts that increase in 
 size from 496,768 characters to 4,967,680 characters (10 times the number).  
 Do you the timings support the O(N+T) analysis for EfficientMarkov?
+
+
+
+
+
 
 (3)The tests in the class Benchmark use an order-5 Markov Model. 
 Run tests that you think are appropriate to determine if the order of the 
 Markov Model has a significant impact on the running time for BaseMarkov. 
 Explain your reasoning.
+
+
+
+
+

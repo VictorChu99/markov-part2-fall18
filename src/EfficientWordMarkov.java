@@ -34,18 +34,21 @@ public class EfficientWordMarkov extends BaseWordMarkov {
 			
 			int track = myWords.length-getOrder();
 			//this if else statement here will identify the correct 
+			String ch; 
+			if(i == track)
+			{
+				ch = PSEUDO_EOS;
+			}
+			else{
+				ch = myWords[i+getOrder()];
+			}
+			
 			if(!myMap.containsKey(key))
 			{
 				myMap.put(key, new ArrayList<String>());
 			}
 			
-			if(i == track)
-			{
-				myMap.get(key).add(PSEUDO_EOS);
-			}
-			else{
-				myMap.get(key).add(myWords[i+getOrder()]);
-			}
+			myMap.get(key).add(ch);
 		}
 		
 	}
