@@ -1,4 +1,3 @@
-import java.util.*;
 /*
  * 
  * Author: Victor CHu
@@ -6,7 +5,7 @@ import java.util.*;
  * Date: 10.18.18
  * 
  */
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class EfficientMarkov extends BaseMarkov{//extends base markov. 
 	//myText issue. myText is used for text generation, since we need to pick a starting point
@@ -16,11 +15,10 @@ public class EfficientMarkov extends BaseMarkov{//extends base markov.
 	
 	private Map<String,ArrayList<String>> myMap;
 	
-	
 	//constructs our map, and order for later on 
 	public EfficientMarkov(int order)
 	{
-		super(order);
+		super(order);//initialize order state. Inheritance
 		myMap = new HashMap<String,ArrayList<String>>();
 	}
 	
@@ -31,7 +29,9 @@ public class EfficientMarkov extends BaseMarkov{//extends base markov.
 	}
 	
 	
+	
 	@Override
+	//need to override this 
 	public void setTraining(String text)
 	{
 		myMap.clear();//clear the map first. 
@@ -64,16 +64,19 @@ public class EfficientMarkov extends BaseMarkov{//extends base markov.
 	}
 	
 	@Override
+	//this method will return the arrayList values for the keys
 	public ArrayList<String> getFollows(String key)
 	{
+		//checks to see if the key is in the map
+		if(myMap.containsKey(key))
+		{
+			ArrayList<String> returnVal = myMap.get(key);
 		
-		if(!myMap.containsKey(key))
-			throw new NoSuchElementException(key+" not in map");//throw this if we don't find it in our map
-		else {
-			ArrayList<String> returnVal = myMap.get(key);//retrieves the arrayList
-			
-			return returnVal;//returns our arrayList
+			return returnVal;
 		}
+		//if we don't find our key, throw an exception
+		throw new NoSuchElementException(key+" not in map");
+	
 	}
 	
 	

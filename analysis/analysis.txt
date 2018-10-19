@@ -3,6 +3,10 @@ This is the analysis for Markov Part 2, Fall 2018
 Include your name and net id here. Answer the questions from the assignment 
 that are reproduced below
 
+Victor Chu
+vic4
+10.19.18
+
 (1) Determine (from running Benchmark.java) how long it takes for 
 BaseMarkov to generate 2,000, 4,000, 8,000, 16,000, and 32,000 
 random characters using the default file and an order 5 Markov Model. 
@@ -30,7 +34,7 @@ time	source	#chars
 
 Finished tests
 
-Source code is 496,768, but I 507,914. Piazza post addressed this issue. 
+Source code is 496,768, but I got 507,914. Piazza post addressed this issue. 
 TA said it was okay as well
 
 
@@ -40,10 +44,14 @@ Do you the timings support the O(NT) analysis for BaseMarkov?
 
 Yes. When we multiplied the source by 10, the time roughly increased by a factor 
 of 10 as well. These claims support O(N) complexity. Since we are increasing the characters
-by a factor of 10, the program has to go through each of those characters. For example,
+by a factor of 10, the program has to go through each of those characters again. For example,
 if you doubled the characters, you would increase time by roughly a factor of 2. As you 
-increase the amount of characters, this code gets longer. 
- 
+increase the amount of characters, this complexity gets longer. My benchmark tests support this
+as O(NT) as seen by the time going from 0.619 to 6.417 which is roughly 10. It isn't exactly 10 times longer,
+because each computer has its own different schemes that may affect run time. 
+ This is O(NT) because we first scan the which is O(N), but then rescan for getFollows() is O(T),
+ making it O(NT). Important to note for BaseMarkov but as the order gets larger, this 
+ will get more efficient because we are doing less iterations. 
 
 
 
@@ -84,10 +92,13 @@ because we are adding it. When T is small, it has somewhat of an impact,
 because 10 might be a large number, relative to N. However,
 when N gets huge,T doesn't matter as much. As seen with the runtime between BaseMarkov
 and EfficientMarkov, initially, T has somewhat of an impact increasing runtime just slightly
-for EfficientMarkov. However, as N gets larger, this T doesn't matter
+for EfficientMarkov. However, as N gets larger, this 'T' doesn't matter
 as much, and EfficientMarkov is much quicker than BaseMarkov which has a runtime of O(NT). 
 This is due to the fact that O(NT) is much larger, because when your N gets large, 
-you multiply that by a factor of 10 making it even larger. 
+you multiply that by a factor of 10 making it even larger. O(N+T) is reasonable, 
+because the getFollows is a O(T) operation in this case(actually O(1 but called T times),
+and scanning the text is O(N), therefore, O(N+T). Also, EfficientMarkov, 
+was noticeably faster than BaseMarkov because it implemented a Map with key,value pairs.
 
 
 
@@ -101,7 +112,10 @@ The orders I used were order-400,000 and order-1000 as shown below. Order has a
 significant impact on the overall runtime in this program. Order 4000000 was super 
 fast because, we are essentially blocking more out of the text. This means less iterations. 
 However, when we have order 1000, it takes longer because we are having to make 
-more iterations. This results in a longer runtime as shown below. 
+more iterations. This results in a longer runtime as shown below. For example, 
+if we had a text of abababababababababa... so on so forth repeating this pattern, as the order
+got larger, we would get faster because of less iterations. The relative size of the program may not be
+changing, but the order-markov we are using is, which affects runtime. 
 
 ORDER 400,000
 

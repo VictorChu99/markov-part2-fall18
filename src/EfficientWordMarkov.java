@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.*;
 
+
 /*
  * 
  * Author: Victor CHu
@@ -11,6 +12,7 @@ import java.util.*;
  * Date: 10.18.18
  * 
  */
+
 
 public class EfficientWordMarkov extends BaseWordMarkov {
 	//more or less the same as EfficientMarkov
@@ -23,17 +25,18 @@ public class EfficientWordMarkov extends BaseWordMarkov {
 	
 	public EfficientWordMarkov(int order)
 	{
-		super(order);
+		super(order);//initialize order state. Inheritance
 		myMap = new HashMap<WordGram,ArrayList<String>>();//create a map but with wordgram objects now
 	}
 	
 	public EfficientWordMarkov()//default constructor
 	{
-		this(3);
+		this(3);//order 3 by default
 	}
 	
 	
-	
+	//this method will make our map with keys and values
+	//the keys in this case are Wordgrams, and values are words
 	@Override
 	public void setTraining(String text)
 	{
@@ -73,17 +76,18 @@ public class EfficientWordMarkov extends BaseWordMarkov {
 		
 	}
 	
+	
 	@Override
 	public ArrayList<String> getFollows(WordGram key)//straightforward. Returns arraylist
 	{
-		if(!myMap.containsKey(key))
-			throw new NoSuchElementException(key+" not in map");
-		else {
+		if(myMap.containsKey(key))
+		{
 			ArrayList<String> returnVal = myMap.get(key);
-			
+		
 			return returnVal;
 		}
+		throw new NoSuchElementException(key+" not in map");
+	
 	}
-	
-	
 }
+	
