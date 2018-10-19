@@ -4,6 +4,14 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.*;
 
+/*
+ * 
+ * Author: Victor CHu
+ * Net ID: vic4
+ * Date: 10.18.18
+ * 
+ */
+
 public class EfficientWordMarkov extends BaseWordMarkov {
 	//more or less the same as EfficientMarkov
 	//but using wordgrams as the keys instead.
@@ -39,31 +47,34 @@ public class EfficientWordMarkov extends BaseWordMarkov {
 		for(int i = 0; i <= myWords.length-getOrder();i++)//loop through text
 		//make sure to subtract order so we don't get out of bounds exception
 		{
-			WordGram key = new WordGram(myWords, i, getOrder());
+			WordGram key = new WordGram(myWords, i, getOrder());//constructs the wordgram
+			//need an arraylist, starting point, and a size.
+			//we use myWords for the arrayList, index i for the starting point in myWords,
+			//then the order for the size of the wordgram. 
 			
-			int track = myWords.length-getOrder();
-			//this if else statement here will identify the correct 
+			int track = myWords.length-getOrder();//tells us when we are at the end
+			
 			String ch; 
-			if(i == track)//must be the last character
+			if(i == track)//
 			{
-				ch = PSEUDO_EOS;
+				ch = PSEUDO_EOS;//inherited BaseWordMarkov
 			}
 			else{
-				ch = myWords[i+getOrder()];
+				ch = myWords[i+getOrder()];//gets the last word for value
 			}
 			
 			if(!myMap.containsKey(key))
 			{
-				myMap.put(key, new ArrayList<String>());
+				myMap.put(key, new ArrayList<String>());//makes a new key
 			}
 			
-			myMap.get(key).add(ch);
+			myMap.get(key).add(ch);//adds values to the arraylist
 		}
 		
 	}
 	
 	@Override
-	public ArrayList<String> getFollows(WordGram key)
+	public ArrayList<String> getFollows(WordGram key)//straightforward. Returns arraylist
 	{
 		if(!myMap.containsKey(key))
 			throw new NoSuchElementException(key+" not in map");

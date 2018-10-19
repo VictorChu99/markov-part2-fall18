@@ -1,4 +1,11 @@
 import java.util.*;
+/*
+ * 
+ * Author: Victor CHu
+ * Net ID: vic4
+ * Date: 10.18.18
+ * 
+ */
 import java.util.NoSuchElementException;
 
 public class EfficientMarkov extends BaseMarkov{//extends base markov. 
@@ -17,6 +24,7 @@ public class EfficientMarkov extends BaseMarkov{//extends base markov.
 		myMap = new HashMap<String,ArrayList<String>>();
 	}
 	
+	//default constructor is order 3. 
 	public EfficientMarkov()
 	{
 		this(3);

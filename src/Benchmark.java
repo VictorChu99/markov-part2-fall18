@@ -89,7 +89,7 @@ public class Benchmark {
 		String source = TextSource.textFromFile(file);
 		int[] sizes = {2000, 4000, 8000, 16000,32000};
 		int order = 400000;//change this
-		MarkovInterface<String> model = new EfficientMarkov(order);
+		MarkovInterface<String> model = new BaseMarkov(order);
 		
 		// call benchmark and ignore value, first trial generates bogus data
 		data = benchmark(model,source,1000);
